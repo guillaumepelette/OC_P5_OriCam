@@ -1,0 +1,298 @@
+@font-face {
+    font-family: "Roboto-Regular";
+    src: url("../fonts/Roboto-Regular.ttf") format("ttf"),
+}
+
+@font-face {
+    font-family: "Roboto-Medium";
+    src: url("../fonts/Roboto-Medium.ttf") format("ttf"),
+}
+
+@font-face {
+font-family: "Montserrat-Regular";
+    src: url("../fonts/Montserrat-Regular.ttf") format("ttf"),
+}
+
+@font-face {
+font-family: "Montserrat-SemiBold";
+    src: url("../fonts/Montserrat-SemiBold.ttf") format("ttf"),
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Roboto-Regular, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 100%;
+    width: 100%;
+    color:#4f4f4f;
+}
+
+body {
+    background: #fff;
+    display:flex;
+    flex-flow: column nowrap;
+    align-items:center;
+}
+
+a {
+    color: ##4f4f4f !important;
+}
+
+.body-container {
+    display:flex;
+    flex-flow: column nowrap;
+    align-items:center;
+    max-width: 1200px;
+}
+
+
+/* HEADER */
+nav {
+
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar-nav {
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:flex-end;
+    align-items: center;
+}
+
+.navbar-nav .active  {
+	background-color: rgb(190, 190, 190);
+}
+
+.active .nav-link {
+    color:#fff !important;
+}
+
+.navbar-nav li {
+    text-align:center;
+}
+
+.navbar-brand {
+    padding: 0;
+    display:flex;
+    flex-shrink:1;
+    max-width:100px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.navbar-brand img {
+    height:90px;
+    width: 90px;
+}
+
+.nav-item {
+    font-size: 1.2rem;
+    min-width:70px;
+    max-width:150px;
+}
+
+.nav-link img {
+    height:45px;
+    width:45px;
+}
+
+/* BANNER */
+
+.banner {
+    width: 100%;
+    height: 800px;
+    display:flex;
+    flex-flow: column nowrap;
+    background: #FFF;
+}
+
+.centered {
+	position: absolute;
+    max-width:1200px;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.centered span {
+    display:inline-block;
+    max-width:50px;
+}
+
+.centered span a {
+    border-radius: 0 3px 3px 0;
+    transition: 0.6s ease;
+}
+
+.centered span a img {
+    cursor: pointer;
+	user-select: none;
+    height:40px;
+    width:25px;
+}
+
+.centered h1 {
+    font-family: Roboto;
+    font-weight :700;
+    font-size: 3rem;
+    background-color:rgba(65, 65, 65, 0.8);
+    color: #FFF;
+    padding: 0.5rem 0.2rem;
+}
+
+.bottom {
+	position: absolute;
+	bottom: -20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.bottom button {
+    width:250px;
+    font-size: 1.1rem;
+    font-weight:600;
+    color:#4f4f4f;
+}
+
+
+/* SLIDER */
+
+/* Slideshow container */
+.slideshow-container {
+	text-align: center;
+	margin: auto;
+    max-height:800px;
+  }
+  
+  /* Hide the images by default */
+  .mySlides {
+	display: none;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover, .next:hover {
+	background-color:rgb(214, 214, 214, 0.5)
+  }
+  
+  /* Caption text */
+  .text {
+	color: #808080;
+	font-size: 15px;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+  }
+  
+  /* Number text (1/3 etc) */
+  .numbertext {
+	color: #808080;
+	font-size: 12px;
+	padding: 8px 12px;
+	position: absolute;
+	top: 0;
+  }
+  
+  /* The dots/bullets/indicators */
+
+.dot-box {
+    margin-top:1rem;
+    text-align:center;
+    position: absolute;
+    bottom:-50%;
+}
+
+  .dot {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+  }
+
+  .dot+.active {
+    background-color: #4f4f4f;
+  }
+
+.dot:hover {
+    background-color: #4f4f4f;
+  }
+
+  /* Fading animation */
+  
+  @-webkit-keyframes dim {
+      from {opacity: .4}
+      to {opacity: 1}
+    }
+    
+    @keyframes dim {
+        from {opacity: .4}
+        to {opacity: 1}
+    }
+    
+    .dim {
+      -webkit-animation-name: dim;
+      -webkit-animation-duration: 0.5s;
+      animation-name: dim;
+      animation-duration: 0.5s;
+  
+  }
+
+
+/* MAIN CONTAINER - CARD DECK */
+
+.best-sellers, .our-products {
+    width: 100%;
+    padding: 50px 50px;
+
+}
+
+.best-sellers h1, .our-products h1 {
+    text-align:center;
+    margin-bottom:2rem;
+}
+
+.best-seller-container {
+    width: 100%;
+    display; flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-deck {
+    width: 100%;
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card {
+    max-width: 30%;
+}
+
+.card .card-body p:nth-child(3) {
+    text-align: right;
+    padding-right: 20px;
+}
+
+
+main {
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:flext-start;
+}
