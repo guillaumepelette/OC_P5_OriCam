@@ -35,7 +35,7 @@ body {
 }
 
 a {
-    color: ##4f4f4f !important;
+    color: #4f4f4f !important;
 }
 
 .body-container {
@@ -47,9 +47,6 @@ a {
 
 
 /* HEADER */
-nav {
-
-}
 
 .navbar {
     padding: 0;
@@ -254,7 +251,7 @@ nav {
 
 /* MAIN CONTAINER - CARD DECK */
 
-.best-sellers, .our-products {
+.best-sellers, .our-products, .single-product {
     width: 100%;
     padding: 50px 50px;
 
@@ -267,7 +264,7 @@ nav {
 
 .best-seller-container {
     width: 100%;
-    display; flex;
+    display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
@@ -285,14 +282,65 @@ nav {
     max-width: 30%;
 }
 
+.card .card-body {
+    text-align:center;
+}
+
 .card .card-body p:nth-child(3) {
     text-align: right;
     padding-right: 20px;
 }
 
+.product a {
+    color: #494949;
+    text-decoration: none;
+}
+
+#productList button:hover {
+    background-color: #494949;
+    color:#fff;
+}
+
+
+/* PRODUCT PAGE - SINGLE-PRODUCT-CONTAINER */
+
+
+.single-product {
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content:flex-start;
+    align-items: center;
+}
+
+#productList {
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:flex-start;
+    align-items: center;
+}
+
+#productInfo {
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content:space-around;
+    align-items: center;
+    padding-left:1rem;
+}
+
+#single-product-container {
+    width: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
 
 main {
     display:flex;
     flex-flow:column nowrap;
     justify-content:flext-start;
+}
+
+#lensChoice, #cameraQuantity {
+    font-size:1rem;
 }
