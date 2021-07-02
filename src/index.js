@@ -1,5 +1,15 @@
+// On récupère la quantité d'articles du panier
+function loadBasket() {
+    let quantityProducts = localStorage.getItem('quantity');
 
+    if (quantityProducts == true) {
+        quantityProducts = document.querySelector('.totalQuantity').textContent;
+    } else {
+        document.querySelector('.totalQuantity').textContent = 0;
+    }
+}
 
+loadBasket();
 
 // ANIMATION DU SLIDER
 

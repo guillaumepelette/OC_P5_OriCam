@@ -27,11 +27,16 @@ font-family: "Montserrat-SemiBold";
     color:#4f4f4f;
 }
 
+html {
+    height:100%;
+}
+
 body {
     background: #fff;
     display:flex;
     flex-flow: column nowrap;
     align-items:center;
+    height:100%;
 }
 
 a {
@@ -42,6 +47,7 @@ a {
     display:flex;
     flex-flow: column nowrap;
     align-items:center;
+    width:100%;
     max-width: 1200px;
 }
 
@@ -63,9 +69,23 @@ a {
 	background-color: rgb(190, 190, 190);
 }
 
+.nav-link {
+    padding: 0.2rem 1rem;
+}
+
+.basket-button {
+    padding: 0.5rem 1rem;
+}
+
+.totalQuantity {
+    color: #fff;
+}
+
+
 .active .nav-link {
     color:#fff !important;
 }
+
 
 .navbar-nav li {
     text-align:center;
@@ -91,9 +111,14 @@ a {
     max-width:150px;
 }
 
-.nav-link img {
-    height:45px;
-    width:45px;
+.nav-link >button > img {
+    height:20px;
+    width:20px;
+    margin-left:10px;
+}
+
+.filter-white {
+    filter: invert(92%) sepia(99%) saturate(31%) hue-rotate(45deg) brightness(106%) contrast(100%);
 }
 
 /* BANNER */
@@ -109,7 +134,7 @@ a {
 .centered {
 	position: absolute;
     max-width:1200px;
-	top: 90%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
     text-align: center;
@@ -147,9 +172,8 @@ a {
 
 .bottom {
 	position: absolute;
-	bottom: -20%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	bottom: 30%;
+    max-width: 1200px;
     text-align: center;
 }
 
@@ -317,6 +341,12 @@ a {
     flex-flow: row nowrap;
     justify-content:flex-start;
     align-items: center;
+    width:100%;
+    height:100%;
+}
+
+#cameraImage {
+    vertical-align: middle;
 }
 
 #productInfo {
@@ -324,15 +354,17 @@ a {
     flex-flow: column nowrap;
     justify-content:space-around;
     align-items: center;
-    padding-left:1rem;
+    padding:2rem 0 2rem 2rem;
+    height:100%;
 }
 
 #single-product-container {
-    width: 50%;
+    width: 80%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
 main {
@@ -341,6 +373,97 @@ main {
     justify-content:flext-start;
 }
 
+#product-additional-info {
+    width: 80%;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content:flex-start;
+    align-items:center;
+}
+
 #lensChoice, #cameraQuantity {
     font-size:1rem;
+}
+
+.additional-picture {
+    width:25%;
+    height: auto;
+}
+
+#add-to-basket {
+    padding-left:2rem;
+    font-size:1.5rem;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:space-around;
+    align-items: center;
+}
+
+#add-to-basket > p {
+    text-align:center;
+}
+
+#add-to-basket > button {
+    width:170px;
+    text-align:center;
+    margin:auto;
+}
+
+/* BASKET PAGE */
+
+.your-basket {
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#basket-title-section {
+    text-align: center;
+    margin:3rem 0;
+    border-bottom: 1px solid black;
+}
+
+#products-recap {
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:flex-start;
+    align-items: stretch;
+}
+
+#basket-products-container {
+    border-right:2px solid black;
+}
+
+/* BASKET PAGE - FORMULAIRE */
+
+#basket-payment-form {
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items:center;
+    padding-left: 2rem;
+}
+
+.order-form {
+    padding-left: 2rem;
+}
+
+#basket-payment-form > h1 {
+    text-align:center
+}
+
+#basket-payment-form > h3 {
+    border-bottom: 1px solid darkslategrey;
+    padding-left: 2rem;
+    text-align:center;
+    margin-bottom:2rem;
+}
+
+#basket-payment-form > h6 {
+    padding-left: 2rem;
+}
+
+.form-group {
+    margin-bottom:1rem;
 }

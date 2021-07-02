@@ -37,9 +37,8 @@
               <a class="nav-link" href="#">A Propos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <img src="./images/shopping-cart.svg" alt="">
-                Panier
+              <a class="nav-link" href="./basket.html">
+                <button class="nav-link btn btn-dark text-light ripple-surface basket-button" href="./basket.html" data-target="basket">Panier (<span class="totalQuantity"></span>)<img src="./images/shopping-cart.svg" class="filter-white" alt="Icone de caddy de courses"></button>
               </a>
             </li>
 
@@ -53,7 +52,22 @@
     <main class="single-product">
 
       <div id="single-product-container">
+      </div>
 
+      <div id="product-additional-info">
+        <div class="additional-picture-container">
+          <div class="additional-picture"></div>
+          <div class="additional-picture"></div>
+          <div class="additional-picture"></div>
+          <div class="additional-picture"></div>
+        </div>
+
+        <div id="add-to-basket">
+          <p>
+            Statut: &nbsp;<b>Disponible</b>
+          </p>
+            <button type="button" id="addToBasket" class="btn btn-dark">Ajouter au panier</button>
+        </div>
       </div>
 
 

@@ -1,3 +1,13 @@
+function loadBasket() {
+  let basket = localStorage.getItem('basket');
+  if (basket != null) {
+      showBasket(basket);
+  } else {
+      basket = [{}];
+  }
+}
+
+loadBasket();
 
 
 function ajaxRequest(url) {
