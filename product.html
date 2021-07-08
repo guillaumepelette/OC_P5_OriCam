@@ -36,7 +36,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#">A Propos</a>
             </li>
-            <li class="nav-item">
+            <li id="shopping-cart" class="nav-item">
               <a class="nav-link" href="./basket.html">
                 <button class="nav-link btn btn-dark text-light ripple-surface basket-button" href="./basket.html" data-target="basket">Panier (<span class="totalQuantity"></span>)<img src="./images/shopping-cart.svg" class="filter-white" alt="Icone de caddy de courses"></button>
               </a>
@@ -50,6 +50,23 @@
 
     <!-- Page Content -->
     <main class="single-product">
+    
+      <div class="shopping-cart-action">
+        <div class="shopping-cart-title">
+          <span id="cart-image">
+            <a href="./basket.html">
+              <img img src="./images/shopping-cart.svg" alt="Icone de caddy de courses">
+            </a>
+          </span>
+          <h3>Mon Panier</h3>
+        </div>
+        <div class="shopping-cart-products">
+        </div>
+        <div class="shopping-cart-articles">
+          <button type="button" class="btn btn-gray" data-mdb-ripple-color="dark">Vider le panier</button>
+          <button type="button" class="btn btn-success" data-mdb-ripple-color="success">Commander</button>
+        </div>
+      </div>
 
       <div id="single-product-container">
       </div>

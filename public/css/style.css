@@ -117,11 +117,18 @@ a {
     margin-left:10px;
 }
 
+/* 
+#shopping-cart {
+
+} */
+
 .filter-white {
     filter: invert(92%) sepia(99%) saturate(31%) hue-rotate(45deg) brightness(106%) contrast(100%);
 }
 
 /* BANNER */
+
+
 
 .banner {
     width: 100%;
@@ -275,10 +282,105 @@ a {
 
 /* MAIN CONTAINER - CARD DECK */
 
+.shopping-cart-action {
+    position:fixed;
+    text-align:center;
+    width:350px;
+    background-color: #eceaea;
+    right: 3rem;
+    display:flex;
+    flex-flow:column nowrap;
+    align-items: flex-end;
+    border-radius:1rem;
+    transition:0.5s;
+    transition-delay:1s;
+    color:black !important;
+    padding: 10px 0;
+    visibility: hidden;
+    opacity: 0;
+    top:80px;
+}
+
+.shopping-cart-action.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.shopping-cart-title {
+    display:flex;
+    flex-flow: row nowrap;
+    width:100%;
+    justify-content:center;
+}
+
+.shopping-cart-action .shopping-cart {
+    position:relative;
+    text-align:right;
+    right:3rem;
+    width:100px;
+    height:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content:flex-end;
+    align-items:flex-start;
+    color:black !important;
+}
+
+#cart-image {
+    display:inline-block;
+    width: 20%;
+}
+
+#cart-image img {
+    width:40px;
+    height:40px;
+}
+
+.shopping-cart-title h3 {
+    text-align:left;
+    padding-left:2rem;
+}
+
+.shopping-cart-title h3:hover {
+    color:black;
+}
+
+.shopping-cart-articles {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.shopping-cart-articles button {
+    margin: 0 10px;
+}
+
+.shopping-cart-action .shopping-cart-products {
+    width:100%;
+    text-align:center;
+    font-size: 1rem;
+    padding: 1rem 0;
+    font-weight: 500;
+    color:black !important;
+} 
+
+.shopping-cart-action::before {
+    content:"";
+    position:absolute;
+    top: -5px;
+    right:2rem;
+    width:20px;
+    height:20px;
+    background-color: #eceaea;
+    transform:rotate(45deg);
+}
+
 .best-sellers, .our-products, .single-product {
     width: 100%;
     padding: 50px 50px;
+}
 
+.single-product {
+    position: relative;
 }
 
 .best-sellers h1, .our-products h1 {
@@ -327,7 +429,6 @@ a {
 
 
 /* PRODUCT PAGE - SINGLE-PRODUCT-CONTAINER */
-
 
 .single-product {
     display:flex;
@@ -422,6 +523,12 @@ main {
     text-align: center;
     margin:3rem 0;
     border-bottom: 1px solid black;
+}
+
+#basket-container {
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
 }
 
 #products-recap {

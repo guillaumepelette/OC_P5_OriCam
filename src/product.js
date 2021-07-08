@@ -1,30 +1,27 @@
 function loadBasket() {
     let basket = localStorage.getItem('basket');
-    basket = JSON.stringify(basket);
-    if (basket != null) {
-        returnBasketQuantity(basket);
+    basket = JSON.parse(basket);
+    console.log(basket);
+
+    if (!Array.isArray(basket)) {
+        basket = [];
+        document.querySelector('.totalQuantity').textContent = 0;
     } else {
-        basket = [{}];
+        let totalQuantity = 0;
+        for (let i = 0; i < basket.length; i++) {
+            totalQuantity += Number(basket[i].quantity);
+            console.log(totalQuantity);
+        }
+        document.querySelector('.totalQuantity').textContent = totalQuantity;
     }
     return basket;
 }
 
-let basket = loadBasket();
-
-function returnBasketQuantity(data) {
-    let totalQuantity = 0;
-    console.log(data);
-    for (let i = 0; i < data.length; i++) {
-        totalQuantity += Object.values(data[i])[2];
-    }
-    document.querySelector('.totalQuantity')
-}
-
-let basketQuantity = returnBasketQuantity(basket);
-
+document.onload = loadBasket();
 
 let params = new URLSearchParams(document.location.search);
 let id = params.get("id");
+console.log(id);
 
 // On crée les éléments HTML en javascript
 const cameraElement = document.getElementById('single-product-container')
@@ -120,7 +117,6 @@ function htmlInjectionIntoFetch(data) {
         lensType.push(lens);
     });
     lensType.unshift("Type de lentille");
-    pushBasketButton();
 }
 
 // On récupère les données depuis l'API avec la méthode GET
@@ -142,54 +138,117 @@ function getSingleCameraProduct() {
     fetch(urlOrinoco + id, myInit)
         .then(response => {
             if (response.ok) {
-                response => JSON.stringify(response)
+                response => JSON.parse(response)
                 response.json().then(data => {
+                    console.log(data);
                     htmlInjectionIntoFetch(data);
                     addLensTypeOption();
                     addQuantityOption();
                     pushBasketButton(data);
-                    createBasketAddition();
-                })
-            } else {
-                error => alert("Erreur : " + error);
-            }
-        })
-        .catch(error => alert("Erreur : " + error));
+            })
+        } else {
+            error => alert("Erreur : " + error);
+        }
+    })
+    .catch(error => alert("Erreur : " + error));
 }
-
-getSingleCameraProduct();
-
-function pushBasketButton(data) {
-    let addToBasketButton = document.getElementById('addToBasket');
-    // addToBasketButton.addEventListener('click', updateBasket());
-    addToBasketButton.addEventListener('click', function () {
-        let cameraQuantity = document.getElementById('cameraQuantity').value;
-        let lensType = document.getElementById('lensChoice');
-        let lensTypeSelected = lensType.options[lensType.selectedIndex].textContent;
-        alert('Vous avez ajouté ' + '\u00a0' + cameraQuantity + '\u00a0' + ' articles' + '\u00a0' + data.name + '\u00a0' +
-            'avec une lentille' + '\u00a0' + lensTypeSelected + '\u00a0' + 'à votre panier');
-    });
-}
+    
 
 function createBasketAddition() {
-    let lensType = document.getElementById('lensChoice').value;
-    let cameraQuantity = document.getElementById('cameraQuantity').value;
+    let lensType = document.getElementById('lensChoice');
+    let lensTypeSelected = lensType.options[lensType.selectedIndex].textContent;
+    let cameraQuantity = document.getElementById('cameraQuantity');
+    let cameraQuantitySelected = cameraQuantity.options[cameraQuantity.selectedIndex].textContent;
     let basketAddition = {
         cameraId: id,
-        lens: lensType,
-        quantity: cameraQuantity,
+        lens: lensTypeSelected,
+        quantity: cameraQuantitySelected
     }
+    console.log(basketAddition);
     return basketAddition;
 };
 
+function updateBasketQuantity(data) {
+    let totalQuantity = 0;
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+        let quantityToAdd = data[i].quantity;
+        totalQuantity += Number(quantityToAdd);
+        console.log(totalQuantity);
+    }
+    document.querySelector('.totalQuantity').innerHTML = totalQuantity;
+}
 
 // Mettre à jour le panier
-// function updateBasket() {
-//     let basketAddition = createBasketAddition();
-//     if (Object.keys(basket[0]).length === 0 && basket[0].constructor === Object) {
-//         basket = basketAddition;
-//     } else {
-//         basket +=  basketAddition;
-//     }
-//     // PARSE + STORE in LOCALSTORAGE
-// }
+function updateBasket() {
+    let basket = loadBasket();
+    let basketAddition = createBasketAddition();
+    let emptyBasket = "no";
+    let alreadyExists = false;
+
+    if (Array.isArray(basket) && basket.length == 0) {
+        emptyBasket = "yes";
+    }
+    for (let i=0; i<basket.length; i++) {
+        if ( (basketAddition.cameraId == basket[i].cameraId)
+            && (basketAddition.lens == basket[i].lens) ) {
+                basket[i].quantity = (Number(basket[i].quantity) + Number(basketAddition.quantity)).toString();
+                alreadyExists = true;
+            }
+    }
+    console.log(emptyBasket);
+    console.log(alreadyExists);
+    if ((basket.length > 0) && alreadyExists == false) {
+        basket.push(basketAddition);
+    } else if (emptyBasket == "yes") {
+        basket.push(basketAddition);
+    }
+    console.log(basket);
+    updateBasketQuantity(basket);
+    
+    basket = JSON.stringify(basket);
+    localStorage.setItem('basket', basket);
+}
+
+
+
+function pushBasketButton(data) {
+    let addToBasketButton = document.getElementById('addToBasket');
+    addToBasketButton.addEventListener('click', function () {
+        let lensType = document.getElementById('lensChoice');
+        let lensTypeSelected = lensType.options[lensType.selectedIndex].textContent;
+        let cameraQuantity = document.getElementById('cameraQuantity').value;
+        alert('Vous avez ajouté ' + '\u00a0' + cameraQuantity + '\u00a0' + ' articles' + '\u00a0' + data.name + '\u00a0' +
+        'avec une lentille' + '\u00a0' + lensTypeSelected + '\u00a0' + 'à votre panier');
+        updateBasket(data);
+        loadBasket();
+    });
+}
+
+
+function toggleMenu() {
+    const basketButton = document.querySelector('.basket-button');
+    console.log(basketButton);
+    const shoppingCart = document.querySelector('.shopping-cart-action');
+    console.log(shoppingCart);
+    
+    basketButton.addEventListener('mouseover', function() {
+        shoppingCart.classList.add('active');
+    });
+    
+    shoppingCart.addEventListener('mouseover', function() {
+        shoppingCart.classList.add('active');
+    });
+    
+    basketButton.addEventListener('mouseout', function() {
+        shoppingCart.classList.remove('active');
+    });
+    
+    shoppingCart.addEventListener('mouseout', function() {
+        shoppingCart.classList.remove('active');
+    });
+    
+}
+
+toggleMenu();
+getSingleCameraProduct();

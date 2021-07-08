@@ -1,13 +1,13 @@
-function loadBasket() {
-  let basket = localStorage.getItem('basket');
-  if (basket != null) {
-      showBasket(basket);
-  } else {
-      basket = [{}];
-  }
-}
+// function loadBasket() {
+//   let basket = localStorage.getItem('basket');
+//   if (basket != null) {
+//       showBasket(basket);
+//   } else {
+//       basket = [{}];
+//   }
+// }
 
-loadBasket();
+// loadBasket();
 
 
 function ajaxRequest(url) {
@@ -60,9 +60,10 @@ cameras.then((data) => {
       const price = document.createElement('p');
       price.textContent = `Prix :  ${camera.price/100} €`;
   
-      let cameraId = camera._id;
+      const cameraId = camera._id;
   
       const link = document.createElement('a');
+      link.class="link";
       link.id = 'linkId';
       link.href = 'product.html?id=' + cameraId;
       link.textContent = "Voir le produit";
