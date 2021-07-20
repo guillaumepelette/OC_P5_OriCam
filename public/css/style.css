@@ -540,6 +540,13 @@ main {
 
 #basket-products-container {
     border-right:2px solid black;
+    padding-right: 2rem;
+}
+
+.productCard {
+    border-style:solid;
+    border-width:thin;
+    border-color: rgba(204, 204, 204,0.5);
 }
 
 /* BASKET PAGE - FORMULAIRE */
@@ -575,7 +582,7 @@ main {
     margin-bottom:1rem;
 }
 
-#plusIcon, #minusIcon {
+#plusIcon, #minusIcon, #trashIcon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -590,6 +597,38 @@ main {
     text-align: center;
 }
 
+#trashIcon:hover {
+    background-color:#c92e01;
+}
+
 #basket-payment-form>h6:nth-child(4) {
     margin-bottom:.5rem !important;
+}
+
+.confirm {
+    position:fixed;
+    top: 50%;
+    left:50%;   
+}
+
+#emptyBasketMessageParagraph {
+    margin-top:5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+[id^=quantityNumber] {
+    font-weight:bold;
+}
+
+#quantityText {
+    font-weight:bold;
+    margin-top: 0.5rem;
+    text-align:left;
+    margin-bottom:0px;
+}
+
+#iconsDiv {
+    margin-top:0.3rem;
 }
