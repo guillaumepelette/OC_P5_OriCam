@@ -157,12 +157,16 @@ function getSingleCameraProduct() {
 function createBasketAddition() {
     let lensType = document.getElementById('lensChoice');
     let lensTypeSelected = lensType.options[lensType.selectedIndex].textContent;
+    let regexRule = /[^\w\d\\s]/gi;
+    let modifiedLens = lensTypeSelected.replace(regexRule, "");
+
     let cameraQuantity = document.getElementById('cameraQuantity');
     let cameraQuantitySelected = cameraQuantity.options[cameraQuantity.selectedIndex].textContent;
     let basketAddition = {
         cameraId: id,
         lens: lensTypeSelected,
-        quantity: cameraQuantitySelected
+        uniqueLensId: modifiedLens,
+        quantity: cameraQuantitySelected,
     }
     console.log(basketAddition);
     return basketAddition;
@@ -209,7 +213,6 @@ function updateBasket() {
     basket = JSON.stringify(basket);
     localStorage.setItem('basket', basket);
 }
-
 
 
 function pushBasketButton(data) {

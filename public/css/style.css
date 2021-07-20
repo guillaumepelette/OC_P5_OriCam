@@ -574,3 +574,22 @@ main {
 .form-group {
     margin-bottom:1rem;
 }
+
+#plusIcon, #minusIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 8px;
+
+    background: inherit;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+}
+
+#basket-payment-form>h6:nth-child(4) {
+    margin-bottom:.5rem !important;
+}
