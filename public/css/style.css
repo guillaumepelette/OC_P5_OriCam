@@ -547,6 +547,7 @@ main {
     border-style:solid;
     border-width:thin;
     border-color: rgba(204, 204, 204,0.5);
+    margin-bottom: 1rem;
 }
 
 /* BASKET PAGE - FORMULAIRE */

@@ -28,6 +28,8 @@ function checkIfBasketIsEmpty() {
         emptyBasketMessageDivElement.appendChild(emptyBasketMessageParagraph);
         let deliveryCosts = document.querySelector('h6.mb-3');
         deliveryCosts.textContent = "Livraison: ";
+        const paymentForm = document.getElementById('basket-payment-form');
+        paymentForm.style.display = "none";
     }
 }
 
@@ -244,7 +246,6 @@ async function createProductCard() {
     productModificationIcons.forEach(icon => {
         icon.style.pointerEvents = "none";
         let hoverableSpan = icon.parentElement;
-        console.log(hoverableSpan);
         hoverableSpan.addEventListener('mouseenter', function(event) {
             let span = event.target
             span.style.cursor = 'pointer';
@@ -326,6 +327,7 @@ async function createProductCard() {
                 console.log((finalBasket[indexProductInBasket].price)/100);
                 deleteProductFromBasket(indexProductInBasket, finalBasket, totalQuantity, finalSubTotal);
                 computeBasketValue(totalQuantityValue, totalQuantity, finalSubTotalValue, finalSubTotal, finalTotalValue);
+
                 location.reload();
             }
         });
@@ -382,4 +384,66 @@ function deleteProductFromBasket(index, basket) {
     return basket[index];
 }
 
+
+function getContactInfo() {
+    let formEmailAddress = document.getElementById('order-form-email_address').value;
+    console.log(formEmailAddress);
+    let formFirstName = document.getElementById('order-form-first_name').value;
+    console.log(formFirstName);
+    let formLastName = document.getElementById('order-form-last_name').value;
+    console.log(formLastName);
+    let formStreetNumber = document.getElementById('order-form-street_number').value;
+    let formStreetName = document.getElementById('order-form-street_name').value;
+    // let formPostCode = document.getElementById('order-form-post_code').value;
+    let formCity = document.getElementById('order-form-city').value;
+    // let formCountry = document.getElementById('order-form-country').value;
+    let formFullAddress = formStreetNumber+" "+formStreetName
+    console.log(formFullAddress);
+
+    let contact = {
+        prénom: formFirstName,
+        nom: formLastName,
+        adresse: formFullAddress,
+        ville: formCity,
+        email: formEmailAddress
+    }
+    return(contact);
+}
+
+async function sendOrderInfo(contact, products) {
+    const response = await fetch(urlOrinoco+'order', 
+    {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify({
+            contacts: contact,
+            product: products
+        }),
+        mode: 'cors',
+        credentials: "same-origin",
+        cache: 'default'
+    });
+    if (!response.ok) {
+        throw new Error("Erreur HTTP: " + response.status);
+    }
+    const content = await response.json();
+    return content;
+}
+
+async function createOrder() {
+    let orderInfoSubmitButton = document.querySelector('form.order-form button')
+    console.log(orderInfoSubmitButton);
+    orderInfoSubmitButton.addEventListener('click', async function() {
+        let contact = getContactInfo();
+        let products = localStorage.getItem('basket');
+        products = JSON.parse(products);
+        console.log(contact);
+        console.log(products);
+        await sendOrderInfo(contact, products);
+    });
+}
+
 createProductCard();
+createOrder();
+
+console.log(sendOrderInfo);
