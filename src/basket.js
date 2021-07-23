@@ -363,7 +363,7 @@ function increaseBasketQuantity(index, basket) {
     basket[index].quantity += 1;
     console.log(basket[index].quantity);
     
-    let quantityElement = document.getElementById('quantityNumber'+index.toString());
+    let quantityElement = document.getElementById('quantityNumber'+index.toString());t
     quantityElement.textContent = basket[index].quantity;
     
     let stringBasket = JSON.stringify(basket);
@@ -401,24 +401,29 @@ function getContactInfo() {
     console.log(formFullAddress);
 
     let contact = {
-        prénom: formFirstName,
-        nom: formLastName,
-        adresse: formFullAddress,
-        ville: formCity,
+        firstName: formFirstName,
+        lastName: formLastName,
+        address: formFullAddress,
+        city: formCity,
         email: formEmailAddress
     }
     return(contact);
 }
 
+console.log(urlOrinoco+'order');
+
 async function sendOrderInfo(contact, products) {
+    let orderFinalObject = {
+        contact,
+        products,
+    }
+    let orderFinalObjectJson = JSON.stringify(orderFinalObject);
+    console.log(orderFinalObjectJson);
     const response = await fetch(urlOrinoco+'order', 
     {
         method: 'POST',
         headers: myHeaders,
-        body: JSON.stringify({
-            contacts: contact,
-            product: products
-        }),
+        body: orderFinalObjectJson,
         mode: 'cors',
         credentials: "same-origin",
         cache: 'default'
@@ -427,23 +432,63 @@ async function sendOrderInfo(contact, products) {
         throw new Error("Erreur HTTP: " + response.status);
     }
     const content = await response.json();
+    console.log(content);
     return content;
 }
+
+
+function openModal(modal) {
+    if (modal == null) return;
+     modal.classList.add('active');
+}
+
+function closeModal() {
+    let modal = document.getElementById('final-order_modal');
+    console.log(modal);
+    let closeButton = document.querySelector('[data-close-button]');
+    
+    closeButton.addEventListener('click', function() {
+        if (modal == null) return;
+        modal.classList.remove('active');
+    })
+}
+
+
+async function showOrderIdInModal(orderId, event) {
+    let openButton = event.target;
+    console.log(openButton);
+    const modal = document.querySelector('');
+    console.log(modal);
+    openModal(modal);
+
+    const finalOrderModalElement = document.getElementById('div.modal modal-body');
+    console.log(finalOrderModalElement);
+    let orderIdParagraph = createElement('p');
+    orderIdParagraph.innerHTML = orderId;
+    finalOrderModalElement.appendChild(orderIdParagraph);
+}
+
+
+async function 
 
 async function createOrder() {
     let orderInfoSubmitButton = document.querySelector('form.order-form button')
     console.log(orderInfoSubmitButton);
-    orderInfoSubmitButton.addEventListener('click', async function() {
+    orderInfoSubmitButton.addEventListener('click', async function(event) {
+        event.preventDefault();
         let contact = getContactInfo();
         let products = localStorage.getItem('basket');
         products = JSON.parse(products);
+        let idProductsArray = products.map(array => array.cameraId);
         console.log(contact);
-        console.log(products);
-        await sendOrderInfo(contact, products);
+        console.log(idProductsArray);
+        let postResponse = await sendOrderInfo(contact, idProductsArray);
+        let orderId = postResponse.orderId;
+        console.log(orderId);
+        showOrderIdInModal(orderId, event);
     });
 }
 
-createProductCard();
-createOrder();
 
-console.log(sendOrderInfo);
+createProductCard();
+showOrderIdInModal();

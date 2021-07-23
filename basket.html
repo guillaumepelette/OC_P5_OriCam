@@ -49,6 +49,26 @@
 
       <main class="your-basket">
 
+        <!-- odale affichant la valeur de l'identifiant de commande retourné une fois les infos contact et produit envoyés -->
+        <div class="modal" tabindex="-1" role="dialog" id = "final-order_modal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Votre commande a bien été prise en compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>votre numéro de commande:</p>
+              </div>
+              <div class="modal-footer">
+                <button data-close-button type="button" class="btn btn-primary">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <section id="basket-title-section">
           <h1>Votre Panier</h1>
         </section>
@@ -598,7 +618,7 @@
                     </select>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary col-md-4">Commander</button>
+                <button type="submit" class="btn btn-primary col-md-4" data-modal-target="#final-order_modal">Commander</button>
               </form>
 
             </section>

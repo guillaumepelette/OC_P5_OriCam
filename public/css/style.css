@@ -633,3 +633,12 @@ main {
 #iconsDiv {
     margin-top:0.3rem;
 }
+
+#final-order_modal {
+    transform: scale(0);
+    transition: 500ms ease-in-out;
+}
+
+#final-order_modal {
+    transform: scale(1);
+}
