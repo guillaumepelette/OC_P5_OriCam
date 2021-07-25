@@ -60,23 +60,24 @@ async function getMissingProductData() {
     return data;
 }
 
+function addMissingProductData(basket, missingProductData) {
+    console.log(missingProductData);
+    for (i=0;i<basket.length;i++) {
+        console.log(basket[i].cameraId);
+        let productIndex = missingProductData.findIndex(product => product._id === basket[i].cameraId)
+        console.log(productIndex);
+        basket[i].name = missingProductData[productIndex].name;
+        basket[i].description = missingProductData[productIndex].description;
+        basket[i].price = missingProductData[productIndex].price;
+        basket[i].imageUrl = missingProductData[productIndex].imageUrl;
+    }
+    return basket;
+};
+
 async function addMissingProductDataToBasket() {
     let basket = loadBasket();
     console.log(basket);
     let missingProductData = await getMissingProductData();
-    function addMissingProductData(basket, missingProductData) {
-        console.log(missingProductData);
-        for (i=0;i<basket.length;i++) {
-            console.log(basket[i].cameraId);
-            let productIndex = missingProductData.findIndex(product => product._id === basket[i].cameraId)
-            console.log(productIndex);
-            basket[i].name = missingProductData[productIndex].name;
-            basket[i].description = missingProductData[productIndex].description;
-            basket[i].price = missingProductData[productIndex].price;
-            basket[i].imageUrl = missingProductData[productIndex].imageUrl;
-        }
-        return basket;
-    };
     basket = addMissingProductData(basket, missingProductData);
     console.log(basket);
     return basket;
@@ -442,12 +443,8 @@ function openModal(modal) {
      modal.classList.add('active');
 }
 
-function closeModal() {
-    let modal = document.getElementById('final-order_modal');
-    console.log(modal);
-    let closeButton = document.querySelector('[data-close-button]');
-    
-    closeButton.addEventListener('click', function() {
+function closeModal(modal, button) {
+    button.addEventListener('click', function() {
         if (modal == null) return;
         modal.classList.remove('active');
     })
@@ -457,19 +454,21 @@ function closeModal() {
 async function showOrderIdInModal(orderId, event) {
     let openButton = event.target;
     console.log(openButton);
-    const modal = document.querySelector('');
+    const modal = document.querySelector('#final-order_modal');
     console.log(modal);
     openModal(modal);
 
-    const finalOrderModalElement = document.getElementById('div.modal modal-body');
+    const finalOrderModalElement = document.querySelector('div.modal .modal-body');
     console.log(finalOrderModalElement);
-    let orderIdParagraph = createElement('p');
+    let orderIdParagraph = document.createElement('p');
     orderIdParagraph.innerHTML = orderId;
     finalOrderModalElement.appendChild(orderIdParagraph);
+
+    let closeButton = document.querySelector('[data-close-button]');
+    console.log(closeButton);
+    closeModal(modal, closeButton);
 }
 
-
-async function 
 
 async function createOrder() {
     let orderInfoSubmitButton = document.querySelector('form.order-form button')
@@ -491,4 +490,4 @@ async function createOrder() {
 
 
 createProductCard();
-showOrderIdInModal();
+createOrder();

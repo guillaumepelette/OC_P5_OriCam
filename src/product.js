@@ -32,8 +32,8 @@ product.id = 'productList';
 const productInfo = document.createElement('div');
 productInfo.id = "productInfo";
 
-const cameraName = document.createElement('h3');
-cameraName.id = "cameraName";
+const cameraName = document.createElement('p');
+cameraName.id = "cameraNameShoppingCart";
 
 const cameraImage = document.createElement('img');
 cameraImage.id = 'cameraImage';
@@ -119,6 +119,7 @@ function htmlInjectionIntoFetch(data) {
     lensType.unshift("Type de lentille");
 }
 
+
 // On récupère les données depuis l'API avec la méthode GET
 const urlOrinoco = 'http://localhost:3000/api/cameras/';
 
@@ -145,6 +146,7 @@ function getSingleCameraProduct() {
                     addLensTypeOption();
                     addQuantityOption();
                     pushBasketButton(data);
+                    showBasketProductsinToggleMenu(data);
             })
         } else {
             error => alert("Erreur : " + error);
@@ -250,8 +252,104 @@ function toggleMenu() {
     shoppingCart.addEventListener('mouseout', function() {
         shoppingCart.classList.remove('active');
     });
-    
 }
+
+
+async function getMissingProductData() {
+    const response = await fetch(urlOrinoco , myInit);
+    if (!response.ok) {
+        throw new Error("Erreur HTTP: " + response.status);
+    }
+    const data = await response.json();
+    return data;
+}
+
+
+function addMissingProductData(basket, missingProductData) {
+    console.log(missingProductData);
+    for (i=0;i<basket.length;i++) {
+        console.log(basket[i].cameraId);
+        let productIndex = missingProductData.findIndex(product => product._id === basket[i].cameraId)
+        console.log(productIndex);
+        basket[i].name = missingProductData[productIndex].name;
+        basket[i].price = missingProductData[productIndex].price;
+        basket[i].imageUrl = missingProductData[productIndex].imageUrl;
+    }
+    return basket;
+};
+
+async function addMissingProductDataToBasket() {
+    let basket = loadBasket();
+    let missingProductData = await getMissingProductData();
+    basket = addMissingProductData(basket, missingProductData);
+    console.log(basket);
+    return basket;
+}
+
+async function showBasketProductsinToggleMenu() {
+    let basket = await addMissingProductDataToBasket();
+    console.log(basket);
+
+    let menuProductsElement = document.getElementById('shopping-cart-products');
+    console.log(menuProductsElement);
+
+    for (i=0;i<basket.length;i++) {
+        const product = document.createElement('div');
+        product.id = 'productData';
+        product.style.padding = "0 1rem 1rem 1rem";
+        product.style.fontSize = "80%";
+
+        const div = document.createElement('div');
+        div.id = 'cameraThumbnailDiv';
+
+        const imageDiv = document.createElement('div')
+        imageDiv.classList = "cameraImageThumbnailDiv";
+        imageDiv.style.padding = "0 1rem 1rem 1rem";
+        
+        const image = document.createElement('img');
+        image.id = 'cameraImageThumbnail';
+        image.src = basket[i].imageUrl;
+        image.style.width = "100%";
+        image.style.height = "auto";
+        
+        const name = document.createElement('h6');
+        name.textContent = (i+1)+". "+basket[i].name;
+        name.id = "cameraNameSmall";
+        name.style.marginBottom = "0px";
+        name.style.fontWeight= 900;
+    
+        const lens = document.createElement('p');
+        lens.textContent = ` - Lentille :  ${basket[i].lens}`;
+        lens.style.marginTop = "0.2rem";
+        lens.style.marginBottom = "0px";
+
+        const price = document.createElement('p');
+        price.textContent = `Prix :  ${basket[i].price/100} €`;
+        price.style.marginTop = "0.2rem";
+        price.style.textAlign = "left";
+        price.style.marginBottom = "0px";
+        
+        const quantity = document.createElement('span');
+        quantity.id = 'quantityText';
+        quantity.textContent = "Quantité: ";
+
+        const quantityNumber = document.createElement('span');
+        quantityNumber.id = 'quantityNumber'+ i.toString();
+        console.log(quantityNumber.id);
+        quantityNumber.textContent = basket[i].quantity;
+        quantityNumber.style.textAlign = "left";
+        quantityNumber.style.marginBottom = "0px";
+
+        menuProductsElement.appendChild(product);
+        product.appendChild(name);
+        product.appendChild(div);
+        div.appendChild(lens);
+        div.appendChild(price);
+        div.appendChild(quantity);
+        div.appendChild(quantityNumber);
+    }
+}
+
 
 toggleMenu();
 getSingleCameraProduct();
