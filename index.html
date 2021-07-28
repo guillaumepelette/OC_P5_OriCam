@@ -46,6 +46,28 @@
         </div>
       </nav>
 
+      <div class="shopping-cart-action">
+        <div class="shopping-cart-title">
+          <span id="cart-image">
+            <a href="./basket.html">
+              <img img="img" src="./images/shopping-cart.svg" alt="Icone de caddy de courses">
+            </a>
+          </span>
+          <h3>Mon Panier</h3>
+        </div>
+        <div id="shopping-cart-products-div">
+          <div id="shopping-cart-products"></div>
+          <div id="basketButtonDiv">
+            <a href="./basket.html">
+              <button type="button" class="btn btn-gray" data-mdb-ripple-color="dark">Voir le panier</button>
+            </a>
+            <a href="./basket.html">
+              <button type="button" class="btn btn-primary" data-mdb-ripple-color="success">Commander</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="banner">
 
         <div class="slideshow-container">
@@ -56,12 +78,12 @@
                 <img src="./images/chevron-left.svg" alt="chevron gauche">
               </a>
             </span>
-              <h1>LES PLUS BELLES CAMÉRAS VINTAGE SONT ICI</h1>
-              <span>
-                <a class="next" onclick="plusSlides(1)">
-                  <img src="./images/chevron-right.svg" alt="chevron droit">
-                </a>
-              </span>
+            <h1>LES PLUS BELLES CAMÉRAS VINTAGE SONT ICI</h1>
+            <span>
+              <a class="next" onclick="plusSlides(1)">
+                <img src="./images/chevron-right.svg" alt="chevron droit">
+              </a>
+            </span>
           </div>
 
           <div class="bottom">
@@ -71,33 +93,33 @@
           </div>
 
           <div class="mySlides dim">
-              <!-- <div class="numbertext">1 / 3</div> -->
-              <img src="./images/slider_picture1.jpg" style="width:100%">
-              <!-- <div class="text">Article 1</div> -->
-            </div>
+            <!-- <div class="numbertext">1 / 3</div> -->
+            <img src="./images/slider_picture1.jpg" style="width:100%">
+            <!-- <div class="text">Article 1</div> -->
+          </div>
 
           <div class="mySlides dim">
-              <!-- <div class="numbertext">2 / 3</div> -->
-              <img src="./images/slider_picture2.jpg" style="width:100%">
-              <!-- <div class="text">Article 2</div> -->
-            </div>
+            <!-- <div class="numbertext">2 / 3</div> -->
+            <img src="./images/slider_picture2.jpg" style="width:100%">
+            <!-- <div class="text">Article 2</div> -->
+          </div>
 
           <div class="mySlides dim">
-              <!-- <div class="numbertext">3 / 3</div> -->
-              <img src="./images/slider_picture3.jpg" style="width:100%">
-              <!-- <div class="text">Article 3</div> -->
+            <!-- <div class="numbertext">3 / 3</div> -->
+            <img src="./images/slider_picture3.jpg" style="width:100%">
+            <!-- <div class="text">Article 3</div> -->
           </div>
 
         </div>
       </div>
-      <br />
+      <br/>
 
-      <!-- Les points  -->
+      <!-- Les points -->
       <div class="dot-box">
-          <span class="dot" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
 
       <main class="best-sellers">
 
@@ -105,7 +127,7 @@
 
         <div class="best-seller-container">
 
-          <div class="card-deck">
+          <div id="card-deck">
 
             <div class="card">
               <a href="#" class="stretched-link">
@@ -117,7 +139,7 @@
                 </div>
               </a>
             </div>
-            
+
             <div class="card">
               <a href="#" class="stretched-link">
                 <img class="" src="./images/vcam_2.jpg" alt="image d'un appareil photo vintage">
@@ -128,7 +150,7 @@
                 </div>
               </a>
             </div>
-            
+
             <div class="card">
               <a href="#" class="stretched-link">
                 <img class="" src="./images/vcam_3.jpg" alt="image d'un appareil photo vintage">
@@ -140,48 +162,78 @@
               </a>
             </div>
 
-
           </div>
-
 
         </div>
 
-
       </main>
-
-
-
-      </div>
 
     </div>
 
+  </div>
 
-    <!-- Header -->
-    <header></header>
+  <!-- Header -->
+  <header></header>
 
-    <!-- Page Content -->
-    <main></main>
+  <!-- Page Content -->
+  <main></main>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container"></div>
-    </footer>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark" id="footer">
+    <div class="container">
+      <section class="footer-section">
+        <div class="footer-section-title">
+          <h1 id="footer-section-title_header">Nous Trouver</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
+            et dolore magna aliqua. Sagittis id consectetur purus ut. Diam ut venenatis tellus in metus vulputate
+            eu scelerisque. Et ligula ullamcorper malesuada proin. Sit amet tellus cras adipiscing enim. 
+            Consequat mauris nunc congue nisi.</p>
+        </div>
+      </section>
+      <section class="footer-section">
+        <div class="footer-section-title">
+          <h1 id="footer-section-title_header">A propos</h1>
+        </div>
+        <div class="footer-section-content">
+          <h2 class="footer-section-content_subtitle">Notre Vision</h2>
+          <h2 class="footer-section-content_subtitle">Notre Equipe</h2>
+          <h2 class="footer-section-content_subtitle">Notre Contact</h2>
+        </div>
+      </section>
+      <section class="footer-section">
+        <div class="footer-section-title">
+          <h1 id="footer-section-title_header">Actualités</h1>
+        </div>
+        <div class="footer-section-content">
+          <h2 class="footer-section-content_subtitle">Notre Newsletter:</h2>
+          <input type="text" placeholder="Votre adresse email..." id="footer-section-content_searchbox" >
+          <span><i class="fas fa-check"></i></span>
+          <div id="icon_container">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-instagram-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+            <span><i class="fab fa-youtube-square"></i></span>
+          </div>
+        </div>
 
+      </section>
 
+    </div>
+  </footer>
 
-    <!-- Script pour fichier JS perso-->
-    <script async="async" type="text/javascript" src="src/index.js"></script>
+  <!-- Script pour fichier JS perso-->
+  <script async="async" type="text/javascript" src="src/index.js"></script>
 
-    <!-- Scripts pour FontAwesome -->
-    <script type="text/javascript" src="https://kit.fontawesome.com/180cce73de.js" crossorigin="anonymous"></script>
+  <!-- Scripts pour FontAwesome -->
+  <script type="text/javascript" src="https://kit.fontawesome.com/180cce73de.js" crossorigin="anonymous"></script>
 
-    <!-- Scripts pour Material Design for Bootstrap 4 -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+  <!-- Scripts pour Material Design for Bootstrap 4 -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
 
-    <!-- Scripts pour Bootstrap: jQuery, Popper.js puis Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+  <!-- Scripts pour Bootstrap: jQuery, Popper.js puis Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
 
 </html>

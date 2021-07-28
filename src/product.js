@@ -1,7 +1,6 @@
 function loadBasket() {
     let basket = localStorage.getItem('basket');
     basket = JSON.parse(basket);
-    console.log(basket);
 
     if (!Array.isArray(basket)) {
         basket = [];
@@ -10,7 +9,6 @@ function loadBasket() {
         let totalQuantity = 0;
         for (let i = 0; i < basket.length; i++) {
             totalQuantity += Number(basket[i].quantity);
-            console.log(totalQuantity);
         }
         document.querySelector('.totalQuantity').textContent = totalQuantity;
     }
@@ -21,7 +19,6 @@ document.onload = loadBasket();
 
 let params = new URLSearchParams(document.location.search);
 let id = params.get("id");
-console.log(id);
 
 // On crée les éléments HTML en javascript
 const cameraElement = document.getElementById('single-product-container')
@@ -63,8 +60,9 @@ lensChoice.classList.add("form-select", "form-select-sm", "mb-3");
 
 let lensType = [];
 
-let quantityArray = Array.from({ length: 10 }, (_, i) => i + 1)
-quantityArray.unshift("Quantité à ajouter au panier")
+let quantityArray = Array.from({ length: 10 }, (_, i) => i + 1);
+quantityArray.unshift("Quantité à ajouter au panier");
+
 
 function addSmallPictures() {
     let smallPictureElements = document.getElementsByClassName("additional-picture");
@@ -78,7 +76,18 @@ window.addEventListener('load', product);
 
 // On crée une boucle pour afficher la liste déroulante des options de personnalisation des lentilles de la caméra
 function addLensTypeOption() {
-    for (let i = 0; i < lensType.length; i++) {
+    let option_1 = document.createElement('option');
+    option_1.textContent = lensType[0];
+    option_1.value = 0;
+    option_1.setAttribute('selected', 'selected');
+    lensChoice.appendChild(option_1);
+
+    let option_2 = document.createElement('option');
+    option_2.textContent = lensType[1];
+    option_2.value = 1;
+    lensChoice.appendChild(option_2);
+
+    for (let i = 2; i < lensType.length; i++) {
         let option = document.createElement('option');
         option.textContent = lensType[i];
         option.value = i;
@@ -88,7 +97,18 @@ function addLensTypeOption() {
 
 // On crée une boucle pour sélectionner le nombre de produits à ajouter au panier
 function addQuantityOption() {
-    for (let i = 0; i < quantityArray.length; i++) {
+    let option_1 = document.createElement('option');
+    option_1.textContent = quantityArray[0];
+    option_1.value = 0;
+    option_1.setAttribute('selected', 'selected');
+    cameraQuantity.appendChild(option_1);
+
+    let option_2 = document.createElement('option');
+    option_2.textContent = quantityArray[1];
+    option_2.value = 1;
+    cameraQuantity.appendChild(option_2);
+
+    for (let i = 2; i < quantityArray.length; i++) {
         let option = document.createElement('option');
         option.textContent = quantityArray[i];
         option.value = i;
@@ -141,20 +161,49 @@ function getSingleCameraProduct() {
             if (response.ok) {
                 response => JSON.parse(response)
                 response.json().then(data => {
-                    console.log(data);
                     htmlInjectionIntoFetch(data);
                     addLensTypeOption();
                     addQuantityOption();
+                    enableBasketButton();
                     pushBasketButton(data);
                     showBasketProductsinToggleMenu(data);
-            })
-        } else {
-            error => alert("Erreur : " + error);
-        }
-    })
-    .catch(error => alert("Erreur : " + error));
+                })
+            } else {
+                error => alert("Erreur : " + error);
+            }
+        })
+        .catch(error => alert("Erreur : " + error));
 }
-    
+
+function enableBasketButton() {
+    let lensType = document.getElementById('lensChoice');
+    let lensTypeSelected = lensType.options[lensType.selectedIndex].value;
+    const cameraQuantity = document.getElementById('cameraQuantity');
+    const basketButton = document.getElementById('addToBasket');
+
+    lensType.addEventListener("change", function(event) {
+        let input = event.target.value;
+        if (input != 0) {
+            event.target.classList.add("valid");
+        } else { event.target.classList.remove("valid") }
+        if (lensType.classList.contains("valid")
+        && cameraQuantity.classList.contains("valid")) {
+            basketButton.disabled = false;
+        } else {basketButton.disabled = true; }
+    })
+
+    cameraQuantity.addEventListener("change", function(event) {
+        let input = event.target.value;
+        if (input != 0) {
+            event.target.classList.add("valid");
+        } else { event.target.classList.remove("valid") }
+        if (lensType.classList.contains("valid")
+        && cameraQuantity.classList.contains("valid")) {
+            basketButton.disabled = false;
+        } else {basketButton.disabled = true; }
+    });
+}
+
 
 function createBasketAddition() {
     let lensType = document.getElementById('lensChoice');
@@ -170,17 +219,14 @@ function createBasketAddition() {
         uniqueLensId: modifiedLens,
         quantity: cameraQuantitySelected,
     }
-    console.log(basketAddition);
     return basketAddition;
 };
 
 function updateBasketQuantity(data) {
     let totalQuantity = 0;
-    console.log(data);
     for (let i = 0; i < data.length; i++) {
         let quantityToAdd = data[i].quantity;
         totalQuantity += Number(quantityToAdd);
-        console.log(totalQuantity);
     }
     document.querySelector('.totalQuantity').innerHTML = totalQuantity;
 }
@@ -195,27 +241,23 @@ function updateBasket() {
     if (Array.isArray(basket) && basket.length == 0) {
         emptyBasket = "yes";
     }
-    for (let i=0; i<basket.length; i++) {
-        if ( (basketAddition.cameraId == basket[i].cameraId)
-            && (basketAddition.lens == basket[i].lens) ) {
-                basket[i].quantity = (Number(basket[i].quantity) + Number(basketAddition.quantity)).toString();
-                alreadyExists = true;
-            }
+    for (let i = 0; i < basket.length; i++) {
+        if ((basketAddition.cameraId == basket[i].cameraId)
+            && (basketAddition.lens == basket[i].lens)) {
+            basket[i].quantity = (Number(basket[i].quantity) + Number(basketAddition.quantity)).toString();
+            alreadyExists = true;
+        }
     }
-    console.log(emptyBasket);
-    console.log(alreadyExists);
     if ((basket.length > 0) && alreadyExists == false) {
         basket.push(basketAddition);
     } else if (emptyBasket == "yes") {
         basket.push(basketAddition);
     }
-    console.log(basket);
     updateBasketQuantity(basket);
-    
+
     basket = JSON.stringify(basket);
     localStorage.setItem('basket', basket);
 }
-
 
 function pushBasketButton(data) {
     let addToBasketButton = document.getElementById('addToBasket');
@@ -224,39 +266,37 @@ function pushBasketButton(data) {
         let lensTypeSelected = lensType.options[lensType.selectedIndex].textContent;
         let cameraQuantity = document.getElementById('cameraQuantity').value;
         alert('Vous avez ajouté ' + '\u00a0' + cameraQuantity + '\u00a0' + ' articles' + '\u00a0' + data.name + '\u00a0' +
-        'avec une lentille' + '\u00a0' + lensTypeSelected + '\u00a0' + 'à votre panier');
+            'avec une lentille' + '\u00a0' + lensTypeSelected + '\u00a0' + 'à votre panier');
         updateBasket(data);
-        loadBasket();
+        location.reload();
     });
 }
 
 
 function toggleMenu() {
     const basketButton = document.querySelector('.basket-button');
-    console.log(basketButton);
     const shoppingCart = document.querySelector('.shopping-cart-action');
-    console.log(shoppingCart);
-    
-    basketButton.addEventListener('mouseover', function() {
+
+    basketButton.addEventListener('mouseover', function () {
         shoppingCart.classList.add('active');
     });
-    
-    shoppingCart.addEventListener('mouseover', function() {
+
+    shoppingCart.addEventListener('mouseover', function () {
         shoppingCart.classList.add('active');
     });
-    
-    basketButton.addEventListener('mouseout', function() {
+
+    basketButton.addEventListener('mouseout', function () {
         shoppingCart.classList.remove('active');
     });
-    
-    shoppingCart.addEventListener('mouseout', function() {
+
+    shoppingCart.addEventListener('mouseout', function () {
         shoppingCart.classList.remove('active');
     });
 }
 
 
 async function getMissingProductData() {
-    const response = await fetch(urlOrinoco , myInit);
+    const response = await fetch(urlOrinoco, myInit);
     if (!response.ok) {
         throw new Error("Erreur HTTP: " + response.status);
     }
@@ -266,11 +306,8 @@ async function getMissingProductData() {
 
 
 function addMissingProductData(basket, missingProductData) {
-    console.log(missingProductData);
-    for (i=0;i<basket.length;i++) {
-        console.log(basket[i].cameraId);
+    for (i = 0; i < basket.length; i++) {
         let productIndex = missingProductData.findIndex(product => product._id === basket[i].cameraId)
-        console.log(productIndex);
         basket[i].name = missingProductData[productIndex].name;
         basket[i].price = missingProductData[productIndex].price;
         basket[i].imageUrl = missingProductData[productIndex].imageUrl;
@@ -282,18 +319,15 @@ async function addMissingProductDataToBasket() {
     let basket = loadBasket();
     let missingProductData = await getMissingProductData();
     basket = addMissingProductData(basket, missingProductData);
-    console.log(basket);
     return basket;
 }
 
 async function showBasketProductsinToggleMenu() {
     let basket = await addMissingProductDataToBasket();
-    console.log(basket);
 
     let menuProductsElement = document.getElementById('shopping-cart-products');
-    console.log(menuProductsElement);
 
-    for (i=0;i<basket.length;i++) {
+    for (i = 0; i < basket.length; i++) {
         const product = document.createElement('div');
         product.id = 'productData';
         product.style.padding = "0 1rem 1rem 1rem";
@@ -305,37 +339,36 @@ async function showBasketProductsinToggleMenu() {
         const imageDiv = document.createElement('div')
         imageDiv.classList = "cameraImageThumbnailDiv";
         imageDiv.style.padding = "0 1rem 1rem 1rem";
-        
+
         const image = document.createElement('img');
         image.id = 'cameraImageThumbnail';
         image.src = basket[i].imageUrl;
         image.style.width = "100%";
         image.style.height = "auto";
-        
+
         const name = document.createElement('h6');
-        name.textContent = (i+1)+". "+basket[i].name;
+        name.textContent = (i + 1) + ". " + basket[i].name;
         name.id = "cameraNameSmall";
         name.style.marginBottom = "0px";
-        name.style.fontWeight= 900;
-    
+        name.style.fontWeight = 900;
+
         const lens = document.createElement('p');
         lens.textContent = ` - Lentille :  ${basket[i].lens}`;
         lens.style.marginTop = "0.2rem";
         lens.style.marginBottom = "0px";
 
         const price = document.createElement('p');
-        price.textContent = `Prix :  ${basket[i].price/100} €`;
+        price.textContent = `Prix :  ${basket[i].price / 100} €`;
         price.style.marginTop = "0.2rem";
         price.style.textAlign = "left";
         price.style.marginBottom = "0px";
-        
+
         const quantity = document.createElement('span');
         quantity.id = 'quantityText';
         quantity.textContent = "Quantité: ";
 
         const quantityNumber = document.createElement('span');
-        quantityNumber.id = 'quantityNumber'+ i.toString();
-        console.log(quantityNumber.id);
+        quantityNumber.id = 'quantityNumber' + i.toString();
         quantityNumber.textContent = basket[i].quantity;
         quantityNumber.style.textAlign = "left";
         quantityNumber.style.marginBottom = "0px";
@@ -351,5 +384,5 @@ async function showBasketProductsinToggleMenu() {
 }
 
 
-toggleMenu();
 getSingleCameraProduct();
+toggleMenu();

@@ -51,54 +51,44 @@
 
       <main class="our-products">
 
-        <h1>Nos produits</h1>
-
-        <div class="products-container">
-
-          <div class="card-deck">
-
-            <div class="card">
-              <a href="#" class="link">
-                <div class="card-body">
-                </div>
+        <div class="shopping-cart-action">
+          <div class="shopping-cart-title">
+            <span id="cart-image">
+              <a href="./basket.html">
+                <img img src="./images/shopping-cart.svg" alt="Icone de caddy de courses">
               </a>
-            </div>
-            
-            <div class="card">
-              <a href="#" class="link">
-                <div class="card-body">
-                </div>
-              </a>
-            </div>
-            
-            <div class="card">
-              <a href="#" class="link">
-                <div class="card-body">
-                </div>
-              </a>
-            </div>
-
-
+            </span>
+            <h3>Mon Panier</h3>
           </div>
-
-
+          <div id="shopping-cart-products-div">
+            <div id="shopping-cart-products">
+            </div>
+            <div id="basketButtonDiv">
+              <a href="./basket.html">
+                <button type="button" class="btn btn-gray" data-mdb-ripple-color="dark">Voir le panier</button>
+              </a>
+              <a href="./basket.html">
+                <button type="button" class="btn btn-primary" data-mdb-ripple-color="success">Commander</button>
+              </a>
+            </div>
+          </div>
         </div>
 
+        <h1>Nos produits</h1>
 
+        <div id="products-container">
+          <div id="card-deck">
+          </div>
+        </div>
       </main>
 
-
-
       </div>
-
     </div>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container"></div>
     </footer>
-
-
 
     <!-- Script pour fichier JS perso-->
     <script async="async" type="text/javascript" src="src/products.js"></script>
