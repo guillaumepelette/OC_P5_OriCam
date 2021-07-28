@@ -20,6 +20,12 @@ document.onload = loadBasket();
 let params = new URLSearchParams(document.location.search);
 let id = params.get("id");
 
+function addProductNametoTitle(data) {
+    let pageTitle = document.getElementsByTagName('title')[0];
+    let productName = data.name;
+    pageTitle.textContent = `Oricam - ${productName}`
+}
+
 // On crée les éléments HTML en javascript
 const cameraElement = document.getElementById('single-product-container')
 
@@ -34,9 +40,6 @@ cameraName.id = "cameraNameShoppingCart";
 
 const cameraImage = document.createElement('img');
 cameraImage.id = 'cameraImage';
-
-const smallCameraImage = document.createElement('img');
-smallCameraImage.id = 'smallCameraImage';
 
 const cameraDiv = document.createElement('div');
 cameraDiv.id = 'cameraDiv';
@@ -62,14 +65,6 @@ let lensType = [];
 
 let quantityArray = Array.from({ length: 10 }, (_, i) => i + 1);
 quantityArray.unshift("Quantité à ajouter au panier");
-
-
-function addSmallPictures() {
-    let smallPictureElements = document.getElementsByClassName("additional-picture");
-    Object.values(smallPictureElements).forEach(value => {
-        value.appendChild(smallCameraImage);
-    });
-}
 
 // le produit est affiché dès le chargement de la page
 window.addEventListener('load', product);
@@ -127,9 +122,7 @@ function htmlInjectionIntoFetch(data) {
     productInfo.appendChild(cameraPrice);
     productInfo.appendChild(lensChoice);
     productInfo.appendChild(cameraQuantity);
-    addSmallPictures();
     cameraImage.src = data.imageUrl;
-    smallCameraImage.src = data.imageUrl;
     cameraName.textContent = data.name;
     cameraDescription.textContent = data.description;
     cameraPrice.textContent = `Prix :  ${data.price / 100} €`;
@@ -161,6 +154,7 @@ function getSingleCameraProduct() {
             if (response.ok) {
                 response => JSON.parse(response)
                 response.json().then(data => {
+                    addProductNametoTitle(data);
                     htmlInjectionIntoFetch(data);
                     addLensTypeOption();
                     addQuantityOption();

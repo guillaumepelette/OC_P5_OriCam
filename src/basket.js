@@ -103,9 +103,7 @@ async function createProductCard() {
 
         const productCard = document.createElement('div')
         productCard.classList.add("card", "productCard");
-        productCard.style.display = "flex";
-        productCard.style.flexFlow = "row nowrap";
-        productCard.style.maxWidth = "100%";
+
 
         const productCardBody = document.createElement('div')
         productCardBody.classList = "card-body";

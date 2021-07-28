@@ -37,6 +37,7 @@ body {
     flex-flow: column nowrap;
     align-items:center;
     height:100%;
+    margin:0;
 }
 
 a {
@@ -55,18 +56,20 @@ a {
 /* HEADER */
 
 .navbar {
-    padding: 0;
+    padding: 0 !important;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 .navbar-nav {
-    display:flex;
-    flex-flow: row nowrap;
-    justify-content:flex-end;
-    align-items: center;
+    display:flex !important;
+    flex-flow: row wrap !important;
+    justify-content:flex-end !important;
+    align-items: center !important;
 }
 
 .navbar-nav .active  {
-	background-color: rgb(190, 190, 190);
+	background-color: rgb(190, 190, 190) !important;
 }
 
 .nav-link {
@@ -91,11 +94,16 @@ a {
     text-align:center;
 }
 
+.navbar-clickable-icon {
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content:flex-start;
+    align-items:center;
+    max-width:200px;
+}
+
 .navbar-brand {
     padding: 0;
-    display:flex;
-    flex-shrink:1;
-    max-width:100px;
     font-size: 1.8rem;
     font-weight: bold;
 }
@@ -103,6 +111,10 @@ a {
 .navbar-brand img {
     height:90px;
     width: 90px;
+}
+
+.navbar-brand p {
+    margin:auto;
 }
 
 .nav-item {
@@ -115,6 +127,14 @@ a {
     height:20px;
     width:20px;
     margin-left:10px;
+}
+
+nav.navbar div.container-fluid {
+    display:inline;
+}
+
+#navbar-toggler-button {
+    text-align:right;
 }
 
 /* 
@@ -149,6 +169,17 @@ a {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+}
+
+div.centered h1 {
+    font-size: 4vw;
+    height:auto;
+}
+
+div.bottom a button {
+    font-size: 2vw;
+    height: auto;
+    max-width: 30%;
 }
 
 .centered span {
@@ -199,6 +230,8 @@ a {
 	text-align: center;
 	margin: auto;
     max-height:800px;
+    position: relative;
+    width:100%;
   }
   
   /* Hide the images by default */
@@ -237,13 +270,18 @@ a {
     margin-top:1rem;
     text-align:center;
     position: absolute;
-    bottom:-50%;
+    top:95%;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
   .dot {
 	cursor: pointer;
 	height: 15px;
 	width: 15px;
+    max-height: 2vw;
+    max-width: 2vw;
 	margin: 0 2px;
 	background-color: #bbb;
 	border-radius: 50%;
@@ -445,6 +483,10 @@ a {
     padding-right: 20px;
 }
 
+.cameraImageDiv {
+    min-width: 200px;
+}
+
 .product a {
     color: #494949;
     text-decoration: none;
@@ -586,6 +628,9 @@ main {
 }
 
 .productCard {
+    display: flex;
+    flex-flow: row nowrap;
+    max-width: 100%;
     border-style:solid;
     border-width:thin;
     border-color: rgba(204, 204, 204,0.5);
@@ -742,4 +787,220 @@ input.input-error {
 #warning-message-paragraph,
 #order-form-error-message-paragraph {
     display:inline;
+}
+
+/* FOOTER */
+
+footer {
+    width:100%;
+}
+
+#footer-container {
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width:100%;
+    max-width:1320px !important;
+}
+
+.footer-section {
+    display:flex;
+    flex-flow: column nowrap;
+    width:100%;
+    min-width:180px;
+    max-width:400px;
+    flex-shrink:1;
+    color:white;
+    padding-right: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section-title {
+    padding-bottom: 1rem;
+    color:white;
+}
+
+.solid {
+    border-top: 1px solid white;
+    width:100px;
+}
+
+.footer-section-title>p {
+    text-align: justify;
+    font-size:85%;
+}
+
+.footer-section h1 {
+    font-size:150%;
+}
+
+.footer-section h2 {
+    font-size:120%;
+}
+
+.input-group-rounded {
+    color:#4f4f4f;
+}
+
+.footer-section-title h1#footer-section-title_header,
+.footer-section-content h2.footer-section-content_subtitle,
+.footer-section-content p,
+.solid {
+    color: white;
+}
+
+#icon_container {
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size:150%;
+}
+
+#search-addon {
+    display:inline;
+    color:white;
+    position: absolute;
+    text-align: right;
+    margin-top:5px;
+}
+
+#search-addon:hover {
+    cursor: pointer;
+}
+
+#footer-searchbox {
+    width: 80%;
+    flex-shrink: 0;
+    display:inline;
+    position: absolute;
+}
+
+#footer-input-group {
+    margin-bottom:3rem;
+}
+
+i.fas.fa-check.filter-white {
+    position: absolute;
+    right:10%;
+    pointer-events: none;
+}
+
+
+@media screen and (min-width: 800px) {
+    div.centered h1 {
+        font-size: 180%;
+        height:auto;
+    }
+    div.bottom a button {
+        font-size: inherit;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    ul.navbar-nav li.nav-item {
+        font-size: 2.5vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    ul.navbar-nav li.nav-item {
+        font-size: 4vw;
+    }
+}
+
+
+@media screen and (max-width:1000px) {
+    ul.navbar-nav li.nav-item {
+        font-size: 2.5vw;
+    }
+    div.card.productCard.cardBody {
+        min-width:150px;
+        max-width:400px;
+    }
+    div.card.productCard div.card-body {
+        flex-flow: column nowrrap;
+    }
+    #basket-container {
+        flex-flow:column nowrap
+    }
+
+    body {
+        max-width:1000px;
+        width:100%;
+    }
+
+    .your-basket {
+        width:100%;
+    }
+
+    .productCard {
+        display: flex;
+        flex-flow: row nowrap;
+        max-width: 400px;
+        overflow: hidden;
+    }
+
+    #basket-products-container {
+        display:flex;
+        flex-flow: column nowrap;
+        align-items:center;
+    }
+    #cameraDiv {
+        min-width: 100px;
+        max-width:300px;
+    }
+
+    .cameraImageDiv {
+        min-width: 100px;
+    }
+    form.order-form input,
+    form.order-form select,
+    form.order-form button {
+        max-width:300px;
+    }
+
+    #field-format-warning-message {
+        max-width:300px;
+        margin-left:0;
+    }
+
+    #basket-payment-form {
+        text-align:center;
+        width:100%;
+    }
+
+    .order-form {
+        text-align: left;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+
+    #order-form-select_div {
+        text-align: left;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+    }
+
+    .body-container {
+        max-width:100%;
+    }
+
+    #order-form-button_div {
+        text-align: left;
+        width: 50%;
+    }
+
+    #productList {
+        flex-flow:column nowrap;
+    }
+    
+    #productInfo {
+        min-width:100px;
+        max-width:300px;
+    }
 }
