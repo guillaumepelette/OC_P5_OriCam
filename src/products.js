@@ -49,7 +49,7 @@ async function addCameraCards() {
 
   cameraData.forEach(function (camera) {
     const cardDiv = document.createElement('div');
-    cardDiv.id = 'cameraCardDiv';
+    cardDiv.id = 'cameraCardDivProducts';
     cardDiv.classList.add('productCard', 'card');
 
     const cardDivBody = document.createElement('div');

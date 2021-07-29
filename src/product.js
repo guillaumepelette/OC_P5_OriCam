@@ -20,7 +20,7 @@ document.onload = loadBasket();
 let params = new URLSearchParams(document.location.search);
 let id = params.get("id");
 
-function addProductNametoTitle(data) {
+function addProductNameToTitle(data) {
     let pageTitle = document.getElementsByTagName('title')[0];
     let productName = data.name;
     pageTitle.textContent = `Oricam - ${productName}`
@@ -154,7 +154,7 @@ function getSingleCameraProduct() {
             if (response.ok) {
                 response => JSON.parse(response)
                 response.json().then(data => {
-                    addProductNametoTitle(data);
+                    addProductNameToTitle(data);
                     htmlInjectionIntoFetch(data);
                     addLensTypeOption();
                     addQuantityOption();
